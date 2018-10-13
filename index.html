@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta content="IE-edge, chrome=1" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width,height=device-height,initial-scale=1,user-scalable=no" name="viewport">
+    <title>Search list</title>
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <h2>Add/Delete &amp; Search</h2>
+        <input id="search" type="text" placeholder="Search list...">
+    </header>
+    <main>
+        <form autocomplete="off" id="form">
+            <input id="itemText" type="text" placeholder="Add new item" maxlength="20">
+            <input id="add" type="submit" value="Add">
+        </form>
+        <ul>
+            <li class="li-item">I am first
+                <button class="delBtn">X</button>
+            </li>
+            <li class="li-item">I am second
+                <button class="delBtn">X</button>
+            </li>
+        </ul>
+        <div id="confirm">
+            <div id="overlay"></div>
+            <div id="toast">
+                <h1>Destroy item?</h1>
+                <button id="confirmbtn">Yes</button>
+            </div>
+        </div>
+    </main>
+    <script src="js/app.js"></script>
+</body>
+
+</html>
