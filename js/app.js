@@ -69,7 +69,11 @@ function editItem(e){
             let delBtn = document.createElement('button');
             delBtn.classList = 'delBtn';
             delBtn.appendChild(document.createTextNode('X'));
-            edited.appendChild(document.createTextNode(itemText));
+            if(itemText == ''){
+                edited.appendChild(document.createTextNode(textToChange));
+            }else{
+                edited.appendChild(document.createTextNode(itemText));
+            }
             edited.appendChild(delBtn);
             list.insertBefore(edited, input);
             
