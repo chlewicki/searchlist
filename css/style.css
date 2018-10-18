@@ -105,6 +105,7 @@ ul{
     cursor: pointer;
     outline: 0;
     border-radius: 10px;
+    user-select: none;
     -webkit-transition: all .3s ease-in-out;
     -o-transition: all .3s ease-in-out;
     transition: all .3s ease-in-out
@@ -174,4 +175,17 @@ ul{
 }
 #confirm{
     display: none
+}
+.input{
+    background: #bdd4de;
+    border: none;
+    outline: none;
+    padding: 14px 10px;
+    font-size: 20px;
+    width: 100%;
+    border-radius: 10px;
+    margin: 10px 0;
+    -webkit-transform: scale(1.05);
+    -ms-transform: scale(1.05);
+    transform: scale(1.05);
 }

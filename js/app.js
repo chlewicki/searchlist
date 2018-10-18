@@ -1,3 +1,9 @@
+if(localStorage.myList){
+    document.querySelector("ul").innerHTML = localStorage.myList;
+} else{
+    localStorage.myList = document.querySelector("ul").innerHTML;
+}
+
 let form = document.querySelector('#form');
 let list = document.querySelector('ul');
 let search = document.querySelector('#search');
@@ -11,7 +17,7 @@ if(confirmBox.style.display != 'none'){
 }
 
 form.addEventListener('submit', addItem);
-list.addEventListener('click', delItem);
+list.addEventListener('click', editItem);
 search.addEventListener('keyup', searchList);
 
 function addItem(e){
@@ -23,22 +29,53 @@ function addItem(e){
         newLi.classList = 'li-item';
         let delBtn = document.createElement('button');
         delBtn.classList = 'delBtn';
-        delBtn.appendChild(document.createTextNode('X'))
+        delBtn.appendChild(document.createTextNode('X'));
 
         newLi.appendChild(document.createTextNode(itemText));
         newLi.appendChild(delBtn);
         list.appendChild(newLi);
         text.value = '';
+        localStorage.myList = list.innerHTML;
     }
 }
 
-function delItem(e){
+function editItem(e){
     if(e.target.classList.contains('delBtn')){
         confirmBox.style.display = 'block';
         del.onclick = function(){
             let li = e.target.parentNode;
             list.removeChild(li);
-        };
+            localStorage.myList = list.innerHTML;
+        };   
+    }
+    //edit already added item
+    if(e.target.classList.contains('li-item')){
+        let li = e.target;
+        Array.from(li);
+        let textToChange = li.firstChild.textContent;
+        let input = document.createElement('input');
+        input.classList = 'input';
+        input.setAttribute('type', 'text');
+        input.setAttribute('value', textToChange);
+        //autofocus on all inputs?
+        list.insertBefore(input, li);
+        list.removeChild(li);
+
+        //add changed input to list
+        input.addEventListener('blur', function(e){ //keyup, keyCode 13?
+            let itemText = input.value;
+            let edited = document.createElement('li');
+            edited.classList = 'li-item';
+            let delBtn = document.createElement('button');
+            delBtn.classList = 'delBtn';
+            delBtn.appendChild(document.createTextNode('X'));
+            edited.appendChild(document.createTextNode(itemText));
+            edited.appendChild(delBtn);
+            list.insertBefore(edited, input);
+            
+            list.removeChild(input);
+            localStorage.myList = list.innerHTML;
+        });
     }
 }
 function searchList(e){
