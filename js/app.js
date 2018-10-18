@@ -1,3 +1,9 @@
+if(localStorage.myList){
+    document.querySelector("ul").innerHTML = localStorage.myList;
+} else{
+    localStorage.myList = document.querySelector("ul").innerHTML;
+}
+
 let form = document.querySelector('#form');
 let list = document.querySelector('ul');
 let search = document.querySelector('#search');
@@ -29,6 +35,7 @@ function addItem(e){
         newLi.appendChild(delBtn);
         list.appendChild(newLi);
         text.value = '';
+        localStorage.myList = list.innerHTML;
     }
 }
 
@@ -38,6 +45,7 @@ function delItem(e){
         del.onclick = function(){
             let li = e.target.parentNode;
             list.removeChild(li);
+            localStorage.myList = list.innerHTML;
         };
     }
 }
