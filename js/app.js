@@ -60,25 +60,29 @@ function editItem(e){
         //autofocus on all inputs?
         list.insertBefore(input, li);
         list.removeChild(li);
-
         //add changed input to list
-        input.addEventListener('blur', function(e){ //keyup, keyCode 13?
-            let itemText = input.value;
-            let edited = document.createElement('li');
-            edited.classList = 'li-item';
-            let delBtn = document.createElement('button');
-            delBtn.classList = 'delBtn';
-            delBtn.appendChild(document.createTextNode('X'));
-            if(itemText == ''){
-                edited.appendChild(document.createTextNode(textToChange));
-            }else{
-                edited.appendChild(document.createTextNode(itemText));
+        input.addEventListener('keyup', function(e){
+            if(e.keyCode == 13){
+                input.blur();
             }
-            edited.appendChild(delBtn);
-            list.insertBefore(edited, input);
-            
-            list.removeChild(input);
-            localStorage.myList = list.innerHTML;
+        });
+        input.addEventListener('blur', function(e){
+                let itemText = input.value;
+                let edited = document.createElement('li');
+                edited.classList = 'li-item';
+                let delBtn = document.createElement('button');
+                delBtn.classList = 'delBtn';
+                delBtn.appendChild(document.createTextNode('X'));
+                if(itemText == ''){
+                    edited.appendChild(document.createTextNode(textToChange));
+                }else{
+                    edited.appendChild(document.createTextNode(itemText));
+                }
+                edited.appendChild(delBtn);
+                list.insertBefore(edited, input);
+                
+                list.removeChild(input);
+                localStorage.myList = list.innerHTML;
         });
     }
 }
